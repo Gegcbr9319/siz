@@ -1,0 +1,310 @@
+.image {
+  width: 30px;
+  height: 30px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+  position: relative;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 100px;
+  height: 150px;
+  background-color: antiquewhite;
+}
+
+
+.progress_div {
+  
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+h4{
+  margin-top: 0;
+}
+
+.progressGreen,
+.progressYellow,
+.progressRed {
+  max-width: 60px;
+  height: 15px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  position:absolute;
+  bottom: 5px;
+  border: 0;
+ 
+  border-radius: 20px;
+  
+}
+
+progress::-webkit-progress-bar {
+  border: 0;
+ 
+  border-radius: 20px;
+}
+
+.progressGreen::-webkit-progress-value {
+  background: green;
+  border: 0;
+ 
+  border-radius: 20px;
+  
+}
+.progressYellow::-webkit-progress-value {
+  background: yellow;
+  border: 0;
+ 
+  border-radius: 20px;
+}
+.progressRed::-webkit-progress-value {
+  background: red;
+  border: 0;
+ 
+  border-radius: 20px;
+  
+}
+
+.info{
+width: 150px;
+height: 80px;
+position: absolute;
+z-index: 5;
+bottom: 10px;
+transition: 0.5s;
+display: flex;
+color: white;  
+background-color: black;
+
+text-align: center;
+padding: 10px;
+border-radius: 20px;
+
+}
+
+.infoNone{
+  display: none;
+}
+
+.glove {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: rgb(250, 235, 215);
+  left: 0px;
+  top: 180px;
+}
+
+.glass{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: antiquewhite;
+  left: 600px;
+  top: 0px;
+}
+.hat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: antiquewhite;
+  left: 0px;
+  top: 0px;
+}
+.helmet{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: antiquewhite;
+  left: 100px;
+  top: 0px;
+}
+.costume{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: antiquewhite;
+  left: 100px;
+  top: 180px;
+}
+.choes{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: antiquewhite;
+  left: 100px;
+  top: 400px;
+}
+.earphones{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: antiquewhite;
+  left: 500px;
+  top: 0px;
+}
+.boots{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: antiquewhite;
+  left: 200px;
+  top: 400px;
+}
+.waistband{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: antiquewhite;
+  left: 340px;
+  top: 225px;
+}
+.winterHat{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: antiquewhite;
+  left: 200px;
+  top: 0px;
+}
+.winterBoots{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: antiquewhite;
+  left: 500px;
+  top: 400px;
+}
+.jacket{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: antiquewhite;
+  left: 500px;
+  top: 180px;
+}
+.cloack{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  position: absolute;
+  border-radius: 25px;
+  border: 1px black dashed;
+  padding: 5px;
+  width: 80px;
+  height: 125px;
+  background-color: antiquewhite;
+  left: 600px;
+  top: 180px;
+}
+

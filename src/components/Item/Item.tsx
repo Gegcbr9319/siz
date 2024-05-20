@@ -3,6 +3,8 @@ import styles from "./Item.module.scss";
 
 interface IData {
   name: string;
+  redFlag: boolean;
+  setRedFlag: (active: boolean) => void;
   value: {
     выдано: string;
     выдача: string;
@@ -10,92 +12,98 @@ interface IData {
   };
 }
 
-export const Item: FC<IData> = ({ name, value }) => {
+export const Item: FC<IData> = ({ name, value, redFlag, setRedFlag }) => {
   const path = `../../assets/imagies/${name}.png`;
   const [collorProgress, setCollorProgress] = useState("");
   const [procentDate, setProcentDate] = useState(0);
   const [showInfo, setShowInfo] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [sizName, setSizName] = useState('');
-
+  const [sizName, setSizName] = useState("");
+  const [dateEnd, setDateEnd] = useState("");
 
   const setName = useCallback(() => {
-
     switch (name) {
-      case 'glove':
+      case "glove":
         setSizName("Перчатки защитные");
         break;
-      case 'glass':
+      case "glass":
         setSizName("Очки защитные");
         break;
-      case 'hat':
+      case "hat":
         setSizName("Кепка");
         break;
-        case 'helmet':
-          setSizName("Каска защитная");
+      case "helmet":
+        setSizName("Каска защитная");
         break;
-        case 'costume':
-          setSizName("Костюм ХБ");
+      case "costume":
+        setSizName("Костюм ХБ");
         break;
-        case 'choes':
-          setSizName("Ботинки защитные");
+      case "choes":
+        setSizName("Ботинки защитные");
         break;
-        case 'earphones':
-          setSizName("Наушники защитные");
+      case "earphones":
+        setSizName("Наушники защитные");
         break;
-        case 'boots':
-          setSizName("Сапоги резиновые");
+      case "boots":
+        setSizName("Сапоги резиновые");
         break;
-        case 'waistband':
-          setSizName("Пояс высотный");
+      case "waistband":
+        setSizName("Пояс высотный");
         break;
-        case 'winterHat':
-          setSizName("Шапка зимняя");
+      case "winterHat":
+        setSizName("Шапка зимняя");
         break;
-        case 'winterBoots':
-          setSizName("Сапоги зимние");
+      case "winterBoots":
+        setSizName("Сапоги зимние");
         break;
-        case 'jacket':
-          setSizName("Куртка утепленная");
+      case "jacket":
+        setSizName("Куртка утепленная");
         break;
-        case 'cloack':
-          setSizName("Плащ защитный");
+      case "cloack":
+        setSizName("Плащ защитный");
         break;
       default:
         setSizName("Неизвестно");
     }
-  },[name]);
-
+  }, [name]);
 
   const timeCounter = useCallback(() => {
     const dateStart = Date.parse(startDate);
-    const dateEnd = Date.parse(endDate);
+    const end = Date.parse(dateEnd);
     const currentDate = Date.now();
     const timeWithStart = currentDate - dateStart;
-    const timeToEnd = dateEnd - dateStart;
-    const procent = Math.round((timeWithStart * 100) / timeToEnd);
+    const timeToEnd = end - dateStart;
+    const procent = Math.ceil((timeWithStart * 100) / timeToEnd);
 
     setProcentDate(procent);
-  }, [endDate, startDate]);
+    if (procent > 100 ) {
+      setRedFlag(true);
+    }
+  }, [dateEnd, setRedFlag, startDate]);
 
   const getTimeEnd = useCallback(() => {
+    if(!value.выдано){
+      setRedFlag(true)
+    };
     if (!Number.isNaN(+value.время) && !Number.isNaN(+value.выдано)) {
       const currentDate = new Date(value.выдано);
-      const endDate = new Date(
+      const end = new Date(
         currentDate.getFullYear(),
         currentDate.getMonth() + +value.время,
         currentDate.getDate()
       );
-
+     
       setStartDate(value.выдано);
-      setEndDate(endDate.toString().slice(0, 15));
+      setEndDate(end.toLocaleDateString());
+      setDateEnd(end.toString().slice(0, 15));
       timeCounter();
-    } else {
+     
+    } /* else {
       setEndDate("До износа");
       setProcentDate(0);
-    }
-  }, [timeCounter, value.время, value.выдано]);
+    } */
+  }, [setRedFlag, timeCounter, value.время, value.выдано]);
 
   const setCollor = useCallback(() => {
     let color: string;
@@ -135,7 +143,6 @@ export const Item: FC<IData> = ({ name, value }) => {
     getTimeEnd();
   }, [getTimeEnd]);
 
-
   useEffect(() => {
     setName();
   }, [setName]);
@@ -143,24 +150,24 @@ export const Item: FC<IData> = ({ name, value }) => {
     <div className={styles[name]}>
       <h5>{sizName}</h5>
       <img className={styles.image} src={path} alt={name} />
-      <div
-        className={styles.progress_div}
-        onClick={clickHandler}
-        
-      >
-        {endDate.length != 0 && (
-          <p className={showInfo ? styles.info : styles.infoNone}>
-            Дата следующей выдачи {endDate}
-          </p>
-        )}
+      {procentDate > 0 && (
+        <div className={styles.progress_div} onClick={clickHandler}>
+          {endDate.length != 0 && (
+            <p className={showInfo ? styles.info : styles.infoNone}>
+              Дата следующей выдачи {endDate}
+            </p>
+          )}
 
-        <progress
-          className={styles[collorProgress]}
-          value={procentDate}
-          max={100}
-        />
-        <h4>{`${procentDate} %`} </h4>
-      </div>
+          <progress
+            className={styles[collorProgress]}
+            value={procentDate}
+            max={100}
+          />
+          <h4>{`${procentDate} %`} </h4>
+        </div>
+      )}
+      {procentDate === 0  && value.выдано && <h4>До износа </h4>}
+      {!value.выдано && <h4>Не выдано </h4>}
     </div>
   );
 };

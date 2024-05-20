@@ -1,5 +1,5 @@
 import styles from "./App.module.scss";
-import { Cards, Sheets } from "..";
+import { Cards, Sheets, Watch } from "..";
 
 export const App = () => {
   return (
@@ -8,6 +8,7 @@ export const App = () => {
         <h2 className={styles.h2}> Страница контроля состояния СИЗ</h2>
         <Sheets />
         <Cards />
+        <Watch />
       </div>
     </>
   );

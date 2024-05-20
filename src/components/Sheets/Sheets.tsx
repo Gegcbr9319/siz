@@ -3,11 +3,8 @@ import styles from "./Sheets.module.scss";
 import * as xlsx from "xlsx";
 import { addInventory } from "../../assets/redux/inventorySlice";
 
-
-
 export const Sheets = () => {
   const dispatch = useDispatch();
- 
 
   const readUploadFile = (e: {
     preventDefault: () => void;
@@ -20,6 +17,7 @@ export const Sheets = () => {
       reader.onload = (e) => {
         if (e.target?.result) {
           const data = e.target.result;
+
           const workbook = xlsx.read(data, {
             type: "binary",
             cellDates: true,
@@ -27,15 +25,17 @@ export const Sheets = () => {
           });
           const sheetName = workbook.SheetNames[0];
           const worksheet = workbook.Sheets[sheetName];
+
           const json: {
             работник: string;
             сиз: string;
             время: string | number;
-            выдано: Date;
-            выдача: Date;
+            выдано: string | number | Date;
           }[] = xlsx.utils.sheet_to_json(worksheet);
 
-          const newObjects: { [key: string]: string | number | object }[] = [];
+          const newObjects: {
+            [key: string]: string | number | object | Date;
+          }[] = [];
 
           for (const obj of json) {
             const existingObjectIndex = newObjects.findIndex(
@@ -46,17 +46,18 @@ export const Sheets = () => {
               existingObject[obj["сиз"]] = {
                 время: obj["время"],
                 выдано: obj["выдано"],
-                выдача: obj["выдача"],
               };
             } else {
-              const newObject: { [key: string]: string | number | object } = {
+              const newObject: {
+                [key: string]: string | number | object | Date;
+              } = {
                 работник: obj["работник"],
                 [obj["сиз"]]: {
                   время: obj["время"],
                   выдано: obj["выдано"],
-                  выдача: obj["выдача"],
                 },
               };
+
               newObjects.push(newObject);
             }
           }
@@ -71,16 +72,9 @@ export const Sheets = () => {
 
   return (
     <div>
-     
       <form className={styles.form}>
-        <label /* htmlFor="upload" */ > Выберите таблицу для отображения</label>
-        <input
-          type="file"
-          /* name="upload"
-          id="upload" */
-          
-          onChange={readUploadFile}
-        />
+        <label> Выберите таблицу для отображения</label>
+        <input type="file" onChange={readUploadFile} />
       </form>
     </div>
   );

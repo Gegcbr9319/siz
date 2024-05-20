@@ -5,3 +5,4 @@ export * from './Item';
 export * from './Sheets';
 export * from './Modal';
 export * from './Table';
+export * from './Watch';
